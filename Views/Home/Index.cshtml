@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+</div>
+
+<!-- Table -->
+<table class="table mb-5">
+    <thead>
+        <tr>
+            <th scope="col">Number</th>
+            <th scope="col">Date</th>
+            <th scope="col">Provider</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in ViewBag.Orders)
+        {
+            <tr onclick="location.href='@(Url.Action("Index", "Order", new { id = order.Id }))'">
+                <td>@order.Number</td>
+                <td>@order.Date</td>
+                <td>@(((Provider[])ViewBag.Providers).First(p => p.Id == order.ProviderId).Name)</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="text-center">
+    <partial name="_PartialFiltration"/>
+    
+    <button type="button" class="btn btn-primary mt-5" data-bs-toggle="modal" data-bs-target="#createOrder">
+        Create new order
+    </button>
+</div>
+
+
+<partial name="_PartialAddOrder"/>
+@section Scripts{
+@{
+    <partial name="_ValidationScriptsPartial"/>
+}
+}

@@ -1,0 +1,30 @@
+﻿@model Filter
+
+<form method="get" asp-action="Index" asp-controller="Home">
+    <!-- Date filter -->
+    <div class="input-group p-1">
+        <span class="input-group-text" name="from">From</span>
+        <input asp-for="FromDate" class="form-control">
+        <input asp-for="ToDate" class="form-control">
+        <span class="input-group-text">To</span>
+    </div>
+
+    <div class="input-group p-1">
+        <!-- Provider filter -->
+        <select asp-for="ProviderId" asp-items="@(new SelectList(ViewBag.Providers, "Id", "Name"))" class="form-select">
+            <option selected>-- Provider --</option>
+        </select>
+        
+        <!-- Number filter -->
+        <input asp-for="Number" class="form-control" placeholder="Number"/>
+    </div>
+
+    <!-- Contains item filter -->
+    <div class="input-group p-1">
+        <input asp-for="Name" class="form-control" placeholder="Name"/>
+        <input asp-for="Quantity" class="form-control" placeholder="Quantity" type="number"/>
+        <input asp-for="Unit" class="form-control" placeholder="Unit"/>
+    </div>
+
+    <button class="btn btn-outline-primary" type="submit">Filter</button>
+</form>

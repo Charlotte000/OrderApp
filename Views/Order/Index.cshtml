@@ -1,0 +1,55 @@
+﻿@{
+    ViewData["Title"] = "Order";
+    var order = (Order)ViewBag.Order;
+}
+
+<div class="card text-center m-2">
+    <div class="card-header">@(((Provider[])ViewBag.Providers).First(p => p.Id == order.ProviderId).Name)</div>
+
+    <div class="card-body">
+        <h5 class="card-title">@order.Number</h5>
+
+        <ul class="list-group list-group-flush">
+            <!-- Item list -->
+            @foreach (var item in ViewBag.OrderItems)
+            {
+                <li class="list-group-item">
+                    <div class="input-group">
+                        <input class="form-control" value="@item.Name" disabled readonly/>
+                        <input class="form-control" value="@item.Quantity" disabled readonly>
+                        <input class="input-group-text" value="@item.Unit" disabled readonly/>
+                        <a 
+                            class="btn btn-primary input-group-text"
+                            href="@Url.Action("Delete", "OrderItem", new { id = item.Id })"
+                        >
+                            <i class="bi bi-cart-dash" style="font-size: 1.5rem;"></i>
+                        </a>
+                    </div>
+                </li>
+            }
+
+            <!-- Create item -->
+            <li class="list-group-item">
+                <partial name="_PartialAddOrderItem"/>
+            </li>
+
+
+        </ul>
+    </div>
+
+    <div class="card-footer text-muted">@order.Date</div>
+</div>
+
+<div class="text-end">
+    <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editOrder">Edit</a>
+    <a href="@Url.Action("Delete", "Order", new { id = @order.Id })" class="btn btn-danger">Delete</a>
+</div>
+
+
+<partial name="_PartialEditOrder" model="@order"/>
+
+@section Scripts{
+@{
+    <partial name="_ValidationScriptsPartial"/>
+}
+}

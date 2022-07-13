@@ -1,0 +1,33 @@
+﻿@model Order
+
+<div class="modal fade" id="createOrder" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="post" asp-action="Create" asp-controller="Order">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create new order</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+            
+                <div class="modal-body">
+
+                    <div class="input-group mb-3">
+                        <input asp-for="Number" class="form-control" placeholder="Number" required/>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <input asp-for="Date" class="form-control" pplaceholder="Date" required/>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <select asp-for="ProviderId" class="form-select" asp-items="@(new SelectList(ViewBag.Providers, "Id", "Name"))"></select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

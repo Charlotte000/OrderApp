@@ -1,0 +1,15 @@
+﻿@model OrderItem
+@{
+    var order = (Order)ViewBag.Order;
+}
+
+<form method="post" asp-action="Create" asp-controller="OrderItem" asp-route-orderId="@order.Id">    
+    <div class="input-group">
+        <input asp-for="Name" class="form-control" placeholder="Name" required/>
+        <input asp-for="Quantity" class="form-control" placeholder="Quantity" type="number" required>
+        <input asp-for="Unit" class="input-group-text" placeholder="Unit" required/>
+        <button class="btn btn-primary input-group-text" type="submit">
+            <i class="bi bi-cart-plus" style="font-size: 1.5rem;"></i>
+        </button>
+    </div>
+</form>
