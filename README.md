@@ -1,1 +1,3 @@
 # OrderApp
+
+Uses PostgreSQL server
